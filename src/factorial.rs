@@ -12,10 +12,7 @@ pub fn fact(x: u128, _y: u128) -> u128
         while i <= x
         {
               fact = fact * i;
-             if i == x {
-              break;
-             }
-             i = i + 1;
+            i = i + 1;
         }
 
         fact
