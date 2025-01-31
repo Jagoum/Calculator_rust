@@ -2,8 +2,9 @@ pub fn modulus(x: u128, y: u128) -> u128
 {
     if y == 0
     {
-        print!("Error");
+        println !("Error");
         1
+        
     }   
     else 
     {
