@@ -17,48 +17,84 @@ mod multiply;
 
 fn main() {
    
-    let num1 = read_num();
-    let opt = read_char();
-    let num2 = read_num();
+   // taking the first number
+   println!("Please enter the first number : ");
+   let mut num = String::new();
+   io::stdin().read_line(&mut num).expect("Enter a number");
+   let num: f64 = match num.trim().parse() {
+       Ok(num) => num,
+       Err(_) => {
+           print!("Enter number1 ");
+           return;
+       }
+   };
+
+    // taking the operator
+    println!("Please enter the operator : ");
+    let mut opt = String::new();
+
+    io::stdin().read_line(&mut opt).expect("Enter a number");
+    let opt: char = match opt.trim().parse() {
+        Ok(opt) => opt,
+        Err(_) => {
+            print!("Enter operator");
+            return;
+        }
+    };
+
+      // taking the second number
+
+      println!("Please enter the second number : ");
+      let mut num2 = String::new();
+      io::stdin().read_line(&mut num2).expect("Enter a number");
+      let num2: f64 = match num2.trim().parse() {
+          Ok(num2) => num2,
+          Err(_) => {
+              print!("Enter number1 ");
+              return;
+          }
+      };
+       
 
     match opt {
         '+' => {
-            println!("Result of {num1} + {num2} = {}", add(num1, num2));
-            history(num1, opt, num2, add(num1, num2));
+            println!("Result of {num} + {num2} = {}", add(num, num2));
+            history(num, opt, num2, add(num, num2));
         }
         '-' => {
-            println!("Result of {num1} - {num2} = {}", sub(num1, num2));
-            history(num1, opt, num2, sub(num1, num2));
+            println!("Result of {num} - {num2} = {}", sub(num, num2));
+            history(num, opt, num2, sub(num, num2));
         }
         'x' => {
-            println!("Result of {num1} x {num2} = {}", mult(num1, num2));
-            history(num1, opt, num2, mult(num1, num2));
+            println!("Result of {num} x {num2} = {}", mult(num, num2));
+            history(num, opt, num2, mult(num, num2));
         }
         '/' => {
-            println!("Result of {num1} / {num2} = {}", div(num1, num2));
-            history(num1, opt, num2, div(num1, num2));
+            println!("Result of {num} / {num2} = {}", div(num, num2));
+            history(num, opt, num2, div(num, num2));
         }
         '%' => {
             println!(
-                "Result of {num1} % {num2} = {}",
-                modulus(num1 as u128, num2 as u128)
+                "Result of {num} % {num2} = {}",
+                modulus(num as u128, num2 as u128)
             );
-            let ans = modulus(num1 as u128, num2 as u128);
-            history(num1, opt, num2, ans as f64);
+            let ans = modulus(num as u128, num2 as u128);
+            history(num, opt, num2, ans as f64);
         }
         '!' => {
-            println!("Result of {}! = {}", num1, fact(num1 as u128, num1 as u128));
-            let ans = fact(num1 as u128, num1 as u128);
-            history(num1, opt, num2, ans as f64);
+            println!("Result of {}! = {}", num, fact(num as u128, num as u128));
+            let ans = fact(num as u128, num as u128);
+            history(num, opt, num2, ans as f64);
         }
         '^' => {
-            println!("Result of {} ^ {} = {}", num1, num2, exp(num1, num2));
+            println!("Result of {} ^ {} = {}", num, num2, exp(num, num2));
 
-            history(num1, opt, num2, exp(num1, num2));
+            history(num, opt, num2, exp(num, num2));
         }
         _ => println!("Please Enter either +,  -, x, /, %"),
     };
-read_history();
+   
+   read_history();
     // let message ="Hello welcome to my calculator program";
     // let mess2 ="My name is richmond";
     // fs::write("./history",message);
@@ -68,8 +104,8 @@ read_history();
 }
 
 // Function to log history
-fn history(num1: f64, opt: char, num2: f64, result: f64) {
-    let history = format!("{} {} {} = {}\n", num1, opt, num2, result);
+fn history(num: f64, opt: char, num2: f64, result: f64) {
+    let history = format!("{} {} {} = {}\n", num, opt, num2, result);
     let mut file = OpenOptions::new()
         .append(true)
         .create(true)
@@ -83,38 +119,10 @@ fn read_history()  {
         .read(true)
         .write(true)
         .open("history.txt");
-    println!("{:?}", file);
+    println!("{:?}", &file);
 }
 
 /*This function is used to read a number */
-fn read_num() -> f64 {
-    print!("Please enter the first number : ");
-    let mut num = String::new();
-    io::stdin().read_line(&mut num).expect("Enter a number");
-    let num: f64 = match num.trim().parse() {
-        Ok(num) => num,
-        Err(_) => {
-            print!("Enter number1 ");
-            return 0_f64;
-        }
-    };
-    num
-}
-fn read_char() -> char {
-
-    print!("Please enter the operator : ");
-    let mut opt = String::new();
-
-    io::stdin().read_line(&mut opt).expect("Enter a number");
-    let opt: char = match opt.trim().parse() {
-        Ok(opt) => opt,
-        Err(_) => {
-            print!("Enter operator");
-            return '0';
-        }
-    };
-    opt
-}
 
 mod adding;
 mod subtracting;
