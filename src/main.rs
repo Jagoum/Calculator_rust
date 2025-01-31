@@ -94,7 +94,7 @@ fn main() {
         _ => println!("Please Enter either +,  -, x, /, %"),
     };
    
-   read_history();
+   
     // let message ="Hello welcome to my calculator program";
     // let mess2 ="My name is richmond";
     // fs::write("./history",message);
@@ -114,12 +114,12 @@ fn history(num: f64, opt: char, num2: f64, result: f64) {
     file.write_all(history.as_bytes())
         .expect("Failed to write to file");
 }
-fn read_history()  {
-    let file = OpenOptions::new()
+fn _read_history()  {
+    let _file = OpenOptions::new()
         .read(true)
         .write(true)
         .open("history.txt");
-    println!("{:?}", &file);
+    // println!("{}", {history.txt});
 }
 
 /*This function is used to read a number */

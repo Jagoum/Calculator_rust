@@ -1,8 +1,13 @@
-FROM rust:1.67
+FROM rust:latest AS build
 
-WORKDIR /usr/src/calculator
+WORKDIR /usr/calculator
+
 COPY . .
 
-RUN cargo install --path .
+RUN cargo build 
 
-CMD ["calculator"]
+FROM ubuntu:latest
+
+COPY --from=build  /usr/calculator/target /usr/src/calculator
+
+CMD ["/usr/src/calculator"]
