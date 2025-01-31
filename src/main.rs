@@ -1,4 +1,4 @@
-use std::env;
+use std::{env, fs};
 
 use adding::add;
 use divide::div;
@@ -37,8 +37,15 @@ fn main() {
         '!' => println!("Result of {}! = {}", x, fact(x as u128, x as u128)),
         '^' => println!("Result of {} ^ {} = {}",x,y,exp(x,y)),
 
-        _ => println!("Please Enter either +,  -, x, /, %"),
+        _ => println!("Please Enter either +,  -, x, /, %")
     };
+    let message ="Hello welcome to my calculator program";
+    let mess2 ="My name is richmond";
+    fs::write("./history",message);
+    fs::write("./history",mess2);
+    let output = fs::read_to_string("./history").expect("Nothing to read");
+
+    println!("{}",output);
 
 }
 
