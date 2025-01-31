@@ -1,5 +1,5 @@
 FROM rust:1.67 as builder
-WORKDIR /usr/src/calculator
+WORKDIR /usr/src/
 COPY . .
 RUN cargo install --path .
 
