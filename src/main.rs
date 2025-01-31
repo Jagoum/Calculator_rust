@@ -5,8 +5,10 @@ use divide::div;
 use factorial::fact;
 use modulus::modulus;
 use multiply::mult;
+use exponent::exp;
 use subtracting::sub;
 mod divide;
+mod exponent;
 mod factorial;
 pub mod modulus;
 mod multiply;
@@ -33,6 +35,7 @@ fn main() {
         '/' => println!("Result of {x} / {y} = {}", div(x, y)),
         '%' => println!("Result of {x} % {y} = {}", modulus(x as u128, y as u128)),
         '!' => println!("Result of {}! = {}", x, fact(x as u128, x as u128)),
+        '^' => println!("Result of {} ^ {} = {}",x,y,exp(x,y)),
 
         _ => println!("Please Enter either +,  -, x, /, %"),
     };
