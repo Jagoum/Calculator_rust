@@ -1,7 +1,7 @@
-pub fn fact(x: u128) -> u128
+pub fn fact(x: u128, _y: u128) -> u128
 {
     let mut fact = 1;
-    let i  = 1;
+    let mut i  = 1;
 
     if x == 0{
         1
@@ -9,12 +9,13 @@ pub fn fact(x: u128) -> u128
     else
     {
         
-        while i != x
+        while i <= x
         {
               fact = fact * i;
              if i == x {
               break;
              }
+             i = i + 1;
         }
 
         fact
