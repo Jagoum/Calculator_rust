@@ -1,16 +1,22 @@
 use adding::add;
 use divide::div;
-use exponent::exp;
+use power::exp;
+use exponent::expo;
 use factorial::fact;
 use modulus::modulus;
+/*
+use readnum::read_num;
+*/
 use multiply::mult;
 use std::{
-    fs::OpenOptions,
-    io::{self, Write},
+    fs::{File, OpenOptions},
+    io::{self, Read, Write},
 };
 use subtracting::sub;
-mod divide;
+mod readnum;
 mod exponent;
+mod divide;
+mod power;
 mod factorial;
 pub mod modulus;
 mod multiply;
@@ -18,43 +24,18 @@ mod multiply;
 fn main() {
    
    // taking the first number
-   println!("Please enter the first number : ");
-   let mut num = String::new();
-   io::stdin().read_line(&mut num).expect("Enter a number");
-   let num: f64 = match num.trim().parse() {
-       Ok(num) => num,
-       Err(_) => {
-           print!("Enter number1 ");
-           return;
-       }
-   };
+    
+    
 
     // taking the operator
-    println!("Please enter the operator : ");
-    let mut opt = String::new();
-
-    io::stdin().read_line(&mut opt).expect("Enter a number");
-    let opt: char = match opt.trim().parse() {
-        Ok(opt) => opt,
-        Err(_) => {
-            print!("Enter operator");
-            return;
-        }
-    };
-
-      // taking the second number
-
-      println!("Please enter the second number : ");
-      let mut num2 = String::new();
-      io::stdin().read_line(&mut num2).expect("Enter a number");
-      let num2: f64 = match num2.trim().parse() {
-          Ok(num2) => num2,
-          Err(_) => {
-              print!("Enter number1 ");
-              return;
-          }
-      };
-       
+    let opt = read_num("Enter the operator");
+    let opt:char = opt.trim().parse().expect("Please enter a character");
+    if opt == '+'||opt =='-'|| opt == '/'|| opt == 'x'||opt == '%'||opt == '^'
+    {
+        let num =read_num("Please Enter a number");  
+        let num:f64 = num.trim().parse().expect("Enter a number");
+        let num2 =read_num("Please Enter a number");
+        let num2:f64 = num2.trim().parse().expect("Enter a number");
 
     match opt {
         '+' => {
@@ -81,20 +62,28 @@ fn main() {
             let ans = modulus(num as u128, num2 as u128);
             history(num, opt, num2, ans as f64);
         }
-        '!' => {
-            println!("Result of {}! = {}", num, fact(num as u128, num as u128));
-            let ans = fact(num as u128, num as u128);
-            history(num, opt, num2, ans as f64);
-        }
         '^' => {
             println!("Result of {} ^ {} = {}", num, num2, exp(num, num2));
 
             history(num, opt, num2, exp(num, num2));
         }
-        _ => println!("Please Enter either +,  -, x, /, %"),
+        '~' =>{
+            println!("Result of {num} exp {num2} = {}",expo(num, num2));
+        }
+        
+        _ => println!("Please Enter either +,  -, x, /, %, ~"),
     };
-   
-   
+
+}
+else if opt == '!' {
+        let num =read_num("Please Enter a number");  
+        let num:f64 = num.trim().parse().expect("Enter a number");
+        println!("Result of {}! = {}", num, fact(num as u128));
+        let ans = fact(num as u128);
+        history(num, opt, num,ans as f64);
+}
+   println!("\n");
+    _read_history();
     // let message ="Hello welcome to my calculator program";
     // let mess2 ="My name is richmond";
     // fs::write("./history",message);
@@ -114,11 +103,23 @@ fn history(num: f64, opt: char, num2: f64, result: f64) {
     file.write_all(history.as_bytes())
         .expect("Failed to write to file");
 }
+
+fn read_num(message: &str) -> String
+{
+    println!("Hello {}", message);
+    let mut num = String::new();
+    io::stdin().read_line(&mut num).expect("Enter a number");
+    num
+
+}
 fn _read_history()  {
-    let _file = OpenOptions::new()
-        .read(true)
-        .write(true)
-        .open("history.txt");
+let mut file  = File::open("./history.txt").expect("Unable to read file");
+
+let mut content = String::new();
+
+file.read_to_string(&mut content).expect("Unable to read file");
+
+println!("{}", content);
     // println!("{}", {history.txt});
 }
 

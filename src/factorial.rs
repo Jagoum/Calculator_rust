@@ -1,4 +1,4 @@
-pub fn fact(x: u128, _y: u128) -> u128
+pub fn fact(x: u128) -> u128
 {
     let mut fact = 1;
     let mut i  = 1;
