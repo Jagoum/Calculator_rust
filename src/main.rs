@@ -71,7 +71,9 @@ fn main() {
             println!("Result of {num} exp {num2} = {}",expo(num, num2));
         }
         
-        _ => println!("Please Enter either +,  -, x, /, %, ~"),
+        _ =>{ println!("Please Enter either +,  -, x, /, %, ~");
+		_read_history();
+		}
     };
 
 }
@@ -83,7 +85,6 @@ else if opt == '!' {
         history(num, opt, num,ans as f64);
 }
    println!("\n");
-    _read_history();
     // let message ="Hello welcome to my calculator program";
     // let mess2 ="My name is richmond";
     // fs::write("./history",message);
