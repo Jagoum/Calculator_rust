@@ -6,8 +6,7 @@ on:
 jobs: 
   build:
     runs-on: ubuntu-22.04 
-    permissions:
-     packages: cargo
+
 
     steps:
         # Checkout the repository code
