@@ -1,0 +1,21 @@
+name:  Notify Me on Discord for Commit
+
+on:
+  push:
+    branches:
+        main
+      
+
+  
+
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      
+
+       - name: Send Discord Webhook
+         run: |
+            curl -H "Content-Type: application/json" \-X POST \-d '{"content": ":rocket: New push detected in the repository! Commit details: ${{ github.actor }} just pushed to ${{ github.ref }}."}' \"${{NOTIFY_ME}}"
