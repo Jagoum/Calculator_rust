@@ -1,5 +1,7 @@
 # Calculator_rust
 
+- This calculator program was built by richmond
+
 How to use
 
 - Open your terminal where docker engine is installed
