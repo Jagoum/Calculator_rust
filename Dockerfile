@@ -6,7 +6,9 @@ COPY . .
 
 RUN cargo build 
 
-FROM ubuntu:latest
+FROM alpine:latest
+
+RUN apk add --no-cache libgcc
 
 COPY --from=build  /usr/calculator/target /usr/src/calculator
 
